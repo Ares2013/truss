@@ -5,10 +5,15 @@ sudo: false
 
 go:
   - tip
+  - 1.11.x
   - 1.10.x
-  - 1.9.x
 
-go_import_path: github.com/tuneinc/truss
+matrix:
+  include:
+    - go: 1.11.x
+      env: GO111MODULE=on
+
+go_import_path: github.com/metaverse/truss
 
 before_install:
   # protobuf

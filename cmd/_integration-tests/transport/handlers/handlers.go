@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 	"net/http"
 
-	pb "github.com/tuneinc/truss/cmd/_integration-tests/transport/proto"
+	pb "github.com/metaverse/truss/cmd/_integration-tests/transport/proto"
 )
 
 // NewService returns a naïve, stateless implementation of Service.
@@ -99,7 +99,7 @@ func (s transportpermutationsService) GetWithPathParams(ctx context.Context, in 
 	return &response, nil
 }
 
-// GetWithEnumQuery implements Service.
+// GetWithEnumPath implements Service.
 func (s transportpermutationsService) GetWithEnumPath(ctx context.Context, in *pb.GetWithEnumQueryRequest) (*pb.GetWithEnumQueryResponse, error) {
 	response := pb.GetWithEnumQueryResponse{
 		Out: in.In,

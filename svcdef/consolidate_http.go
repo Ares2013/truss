@@ -9,9 +9,9 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/pkg/errors"
 
-	gogen "github.com/golang/protobuf/protoc-gen-go/generator"
+	gogen "github.com/gogo/protobuf/protoc-gen-gogo/generator"
 
-	"github.com/tuneinc/truss/svcdef/svcparse"
+	"github.com/metaverse/truss/svcdef/svcparse"
 )
 
 type optional interface {
@@ -148,6 +148,10 @@ func paramLocation(field *Field, binding *svcparse.HTTPBinding) string {
 			if optField.Value == "*" {
 				return "body"
 			} else if optField.Value == field.Name {
+				return "body"
+				// Have to CamelCase the fields from the protobuf file, as they may
+				// be lowercase while the name from the Go file will be CamelCased.
+			} else if gogen.CamelCase(strings.Split(optField.Value, ".")[0]) == field.Name {
 				return "body"
 			}
 		}
